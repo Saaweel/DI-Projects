@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class ListaDeLaCompra {
+public class MainFrame {
     private JTextField inputText;
     private JButton addButton;
     private JButton removeButton;
