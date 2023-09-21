@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainFrame {
     private JTextField inputText;
@@ -6,21 +8,31 @@ public class MainFrame {
     private JButton removeButton;
     private JList list;
     private JPanel window;
+    DefaultListModel<String> listModel = new DefaultListModel<>();
 
-    public JTextField getInputText() {
-        return inputText;
-    }
+    public MainFrame() {
+        list.setModel(listModel);
 
-    public JButton getAddButton() {
-        return addButton;
-    }
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String result = inputText.getText();
 
-    public JButton getRemoveButton() {
-        return removeButton;
-    }
+                if (!result.isEmpty()) {
+                    listModel.addElement(result);
+                    inputText.setText("");
+                }
+            }
+        });
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selected = list.getSelectedIndex();
 
-    public JList getList() {
-        return list;
+                if (selected != -1)
+                    listModel.remove(selected);
+            }
+        });
     }
 
     public JPanel getWindow() {
