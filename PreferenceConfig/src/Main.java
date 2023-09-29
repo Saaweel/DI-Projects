@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,7 +8,11 @@ public class Main {
 
         frame.setContentPane(new PreferenceConfig(frame).getWindow());
 
-        frame.setSize(500, 500);
+        frame.setSize(400, 275);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+
         frame.setVisible(true);
     }
 }
