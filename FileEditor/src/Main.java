@@ -5,7 +5,7 @@ public class Main {
         JFrame frame = new JFrame("FileEditor");
 
         frame.getContentPane().add(new FileEditor(frame).getWindow());
-        frame.setSize(800, 800);
+        frame.setSize(700, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setVisible(true);
