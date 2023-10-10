@@ -1,0 +1,40 @@
+/* Estilo para el título */
+.titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* Estilo para las etiquetas */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666;
+}
+
+/* Estilo para los campos de entrada de texto y el combo */
+.input {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #f9f9f9;
+}
+
+/* Estilo para los botones */
+.button {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 30px;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-color: #0078d4;
+    -fx-background-radius: 5px;
+}
+
+/* Estilo para la lista de intereses */
+.listView {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 100px;
+    -fx-font-size: 14px;
+}
