@@ -4,14 +4,14 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="474.0" styleClass="root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
 <top>
 	<MenuBar styleClass="menu-bar" stylesheets="@styles.css" BorderPane.alignment="CENTER">
 		<menus>
 			<Menu mnemonicParsing="false" text="Archivo">
 				<items>
-					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Abrir" />
-					<MenuItem mnemonicParsing="false" styleClass="menu-item" text="Guardar" />
+					<MenuItem mnemonicParsing="false" onAction="#openDocument" styleClass="menu-item" text="Abrir" />
+					<MenuItem mnemonicParsing="false" onAction="#saveDocument" styleClass="menu-item" text="Guardar" />
 				</items>
 			</Menu>
 		</menus>
@@ -41,9 +41,9 @@
 	</ToolBar>
 </left>
 <center>
-	<TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+	<TextArea fx:id="textViewer" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
 </center>
 <bottom>
-	<Button fx:id="clearButton" mnemonicParsing="false" text="Limpiar" BorderPane.alignment="CENTER" />
+	<Button mnemonicParsing="false" onAction="#handleClearButton" text="Limpiar" BorderPane.alignment="CENTER" />
 </bottom>
 </BorderPane>
