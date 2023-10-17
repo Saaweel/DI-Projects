@@ -1,0 +1,61 @@
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+MenuBar {
+    -fx-background-color: #4e4e4e;
+}
+
+MenuBar .menu-bar .menu .menu-item {
+    -fx-text-fill: black; /* Cambiar el color del texto del menú a blanco */
+}
+
+MenuItem {
+    -fx-text-fill: black;
+}
+
+.menu {
+    -fx-background-color: #4e4e4e;
+}
+
+ToolBar {
+    -fx-background-color: #4e4e4e;
+}
+
+Button {
+    -fx-background-color: #2e2e2e;
+    -fx-text-fill: white;
+}
+
+Label {
+    -fx-font-size: 20;
+}
+
+
+.menu-bar,
+.menu,
+.menu-item {
+    -fx-background-color: #4e4e4e;
+}
+
+
+/* Note added .menu:showing .menu-item .label selector */
+
+.menu-bar .label,
+.menu .label,
+.menu-item .label,
+.menu:showing .menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu:hover,
+.menu:showing,
+.menu-item:hover {
+    -fx-background-color: white;
+}
+
+.menu:hover .label,
+.menu:showing .label,
+.menu:showing .menu-item:hover .label {
+    -fx-text-fill: #4e4e4e;
+    }
