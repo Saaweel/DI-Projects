@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
+    <Button mnemonicParsing="false" onAction="#backHandler" text="Volver" />
+    <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+        <GridPane fx:id="contentGrid" maxHeight="Infinity" maxWidth="Infinity">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+            </columnConstraints>
+        </GridPane>
+    </ScrollPane>
+</VBox>
