@@ -1,9 +1,6 @@
 package com.saaweel;
 
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,6 +11,9 @@ public class PrimaryController {
     public TreeView<String> fileExplorer;
 
     public TabPane tabExplorer;
+
+    public MenuItem saveButton;
+
     private FileTreeItem loadFiles(File dir) {
         FileTreeItem parent = new FileTreeItem(dir);
 
@@ -55,6 +55,10 @@ public class PrimaryController {
                     }
                 }
             }
+        });
+
+        saveButton.setOnAction(e -> {
+            System.out.println(tabExplorer.getSelectionModel().selectedItemProperty());
         });
     }
 }

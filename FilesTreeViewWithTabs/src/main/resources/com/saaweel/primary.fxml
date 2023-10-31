@@ -6,7 +6,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
-         <Menu mnemonicParsing="false" text="File">
+         <Menu fx:id="saveButton" mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="Guardar" />
          </Menu>
       </MenuBar>
@@ -14,7 +14,7 @@
    <center>
       <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <TreeView fx:id="fileExplorer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-         <TabPane fx:id="tabExplorer" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+         <TabPane fx:id="tabExplorer" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" />
       </SplitPane>
    </center>
 </BorderPane>
