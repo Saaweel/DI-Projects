@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Objects;
 
 public class PrimaryController {
@@ -49,7 +50,9 @@ public class PrimaryController {
                             content.append(line).append("\n");
                         }
 
-                        tabExplorer.getTabs().add(new Tab(file.getName(), new TextArea(content.toString())));
+                        Tab newTab = new Tab(file.getName(), new TextArea(content.toString()));
+                        newTab.setId(file.getPath());
+                        tabExplorer.getTabs().add(newTab);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -58,7 +61,21 @@ public class PrimaryController {
         });
 
         saveButton.setOnAction(e -> {
-            System.out.println(tabExplorer.getSelectionModel().selectedItemProperty());
+            Tab selectedTab = tabExplorer.getSelectionModel().selectedItemProperty().get();
+
+            if (selectedTab != null) {
+                File file = new File(selectedTab.getId());
+
+                try (FileWriter fileWriter = new FileWriter(file)) {
+                    TextArea textArea = (TextArea) tabExplorer.getSelectionModel().selectedItemProperty().get().getContent();
+
+                    fileWriter.write(textArea.getText());
+
+                    new Alert(Alert.AlertType.CONFIRMATION, "El fichero ha sido guardado").show();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         });
     }
 }
