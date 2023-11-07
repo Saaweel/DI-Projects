@@ -2,12 +2,12 @@ package com.saaweel;
 
 import java.util.Date;
 
-public class Notice {
+public class New {
     private String title;
     private String body;
     private Date date;
 
-    public Notice(String title, String body, Date date) {
+    public New(String title, String body, Date date) {
         this.title = title;
         this.body = body;
         this.date = date;
