@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="037ff72b-8bc6-4984-8ee0-b485bc7048f3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/saaweel/Noticia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/saaweel/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/saaweel/PrimaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/saaweel/SecondaryController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/saaweel/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/saaweel/primary.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/saaweel/secondary.fxml" beforeDir="false" />
-    </list>
+    <list default="true" id="037ff72b-8bc6-4984-8ee0-b485bc7048f3" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
