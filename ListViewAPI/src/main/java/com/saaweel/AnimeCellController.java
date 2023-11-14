@@ -12,6 +12,6 @@ public class AnimeCellController {
         int episodeCount = datum.attributes.episodeCount;
         String showType = datum.attributes.showType;
 
-        
+
     }
 }
