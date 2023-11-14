@@ -15,7 +15,7 @@ public class AnimeFXMLListCell extends ListCell<Datum> {
             setGraphic(null);
         } else {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("filmlistcell.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("animelistcell.fxml"));
                 Parent root = loader.load();
                 AnimeCellController controller = loader.getController();
                 controller.setData(datum);
