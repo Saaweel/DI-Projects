@@ -1,17 +1,11 @@
 package com.saaweel;
 
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import com.saaweel.apimodels.AnimeData;
 import com.saaweel.apimodels.Datum;
+import javafx.collections.FXCollections;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
 import java.io.IOException;
 

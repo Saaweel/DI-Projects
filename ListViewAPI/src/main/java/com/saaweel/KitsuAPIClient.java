@@ -13,8 +13,8 @@ import java.io.IOException;
 
 public class KitsuAPIClient {
     private static final String API_URL = "https://kitsu.io/api/edge/anime";
-    private OkHttpClient client;
-    private ObjectMapper objectMapper;
+    private final OkHttpClient client;
+    private final ObjectMapper objectMapper;
 
     public KitsuAPIClient() {
         client = new OkHttpClient();
@@ -36,9 +36,7 @@ public class KitsuAPIClient {
             if (response.isSuccessful() && responseBody != null) {
                 String responseData = responseBody.string();
                 try {
-
-                    AnimeData animeData = objectMapper.readValue(responseData, AnimeData.class);
-                    return animeData;
+                    return objectMapper.readValue(responseData, AnimeData.class);
                 } catch (InvalidDefinitionException e) {
                     e.printStackTrace();
                 }
