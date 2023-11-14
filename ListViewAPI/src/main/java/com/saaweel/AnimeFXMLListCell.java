@@ -1,6 +1,8 @@
 package com.saaweel;
 
 import com.saaweel.apimodels.Datum;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.ListCell;
 
 public class AnimeFXMLListCell extends ListCell<Datum> {
@@ -12,13 +14,15 @@ public class AnimeFXMLListCell extends ListCell<Datum> {
             setText(null);
             setGraphic(null);
         } else {
-            String title = datum.attributes.canonicalTitle;
-            String posterImage = datum.attributes.posterImage.medium;
-            String synopsis = datum.attributes.synopsis;
-            String startDate = datum.attributes.startDate;
-            String ageRating = datum.attributes.ageRating;
-            int episodeCount = datum.attributes.episodeCount;
-            String showType = datum.attributes.showType;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("filmlistcell.fxml"));
+                Parent root = loader.load();
+                AnimeCellController controller = loader.getController();
+                controller.setData(datum);
+                setGraphic(root);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
