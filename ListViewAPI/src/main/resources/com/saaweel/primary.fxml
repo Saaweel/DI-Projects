@@ -4,11 +4,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-   <children>
-      <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-   </children>
+   <HBox alignment="TOP_CENTER" prefWidth="200.0">
+      <TextField fx:id="limitInput" promptText="Límite">
+         <HBox.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </HBox.margin>
+      </TextField>
+      <TextField fx:id="offsetInput" promptText="Offset">
+         <HBox.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </HBox.margin>
+      </TextField>
+      <Button mnemonicParsing="false" onAction="#search" text="Buscar">
+         <HBox.margin>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </HBox.margin>
+      </Button>
+   </HBox>
+   <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
 </VBox>
