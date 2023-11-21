@@ -2,17 +2,29 @@ package com.saaweel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
+
 public class PrimaryController {
-    @FXML
+    public TextField search;
+
+    public TextField priceLimit;
+
     public ListView<Product> listView;
 
+    private ObservableList<Product> products_showing;
+
+    private ArrayList<Product> products;
+
     public void initialize() {
-        ObservableList<Product> products = FXCollections.observableArrayList();
+        products_showing = FXCollections.observableArrayList();
+
+        products = new ArrayList<>();
 
         try {
             products.add(new Product("Laptop", 999.99, 5));
@@ -49,13 +61,42 @@ public class PrimaryController {
                         if (item != null) {
                             setText(item.getName() + " - $" + item.getPrice() + " (" + item.getStock() + ")");
                         } else {
-                            setText("");
+                            setText(null);
+                            setGraphic(null);
                         }
                     }
                 };
             }
         });
 
-        listView.setItems(products);
+        listView.setItems(products_showing);
+
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                updateList(newValue, Double.parseDouble(priceLimit.getText()));
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Error en los filtros").show();
+                e.printStackTrace();
+            }
+        });
+
+        priceLimit.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                updateList(search.getText(), Double.parseDouble(newValue));
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, "Error en los filtros").show();
+                e.printStackTrace();
+            }
+        });
+
+        updateList(null, null);
+    }
+
+    private void updateList(String filter1, Double filter2) {
+        products_showing.clear();
+
+        for (Product p : products)
+            if ((filter1 == null || p.getName().contains(filter1) && (filter2 == 0.0 || p.getPrice() <= filter2)))
+                products_showing.add(p);
     }
 }
