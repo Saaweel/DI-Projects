@@ -7,41 +7,47 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 public class PrimaryController {
     @FXML
-    public ListView<New> listView;
+    public ListView<Product> listView;
 
     public void initialize() {
-        ObservableList<New> news = FXCollections.observableArrayList();
+        ObservableList<Product> products = FXCollections.observableArrayList();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            news.add(new New("Lanzamiento de Nuevo Producto", "La empresa XYZ ha lanzado su producto estrella esta semana, que promete revolucionar el mercado.", dateFormat.parse("01/10/2023")));
-            news.add(new New("Deportes: Victoria del Equipo en el Campeonato", "Nuestro equipo local ganó la final del campeonato en una emocionante competencia el pasado fin de semana.", dateFormat.parse("15/09/2023")));
-            news.add(new New("Descubrimiento Científico en el Espacio", "Los científicos han anunciado un importante descubrimiento en el espacio que podría cambiar nuestra comprensión del universo.", dateFormat.parse("05/08/2023")));
-            news.add(new New("Economía: Crecimiento Sostenido del Mercado", "Los indicadores económicos muestran un crecimiento sostenido del mercado durante el último trimestre.", dateFormat.parse("20/07/2023")));
-            news.add(new New("Entrevista con Autor Destacado", "Hemos tenido la oportunidad de entrevistar al autor más vendido del año, quien comparte sus ideas y experiencias en su último libro.", dateFormat.parse("10/06/2023")));
-            news.add(new New("Política: Acuerdo Histórico en el Congreso", "El Congreso aprobó un acuerdo histórico que podría tener un impacto significativo en el país en los próximos años.", dateFormat.parse("25/05/2023")));
-            news.add(new New("Tecnología: Lanzamiento de Nuevo Teléfono Inteligente", "La compañía ABC ha anunciado el lanzamiento de su último teléfono inteligente con características innovadoras.", dateFormat.parse("07/04/2023")));
-            news.add(new New("Arte y Cultura: Exposición de Arte Contemporáneo", "Una nueva exposición de arte contemporáneo ha abierto sus puertas en el museo local, presentando obras de artistas reconocidos internacionalmente.", dateFormat.parse("15/03/2023")));
-            news.add(new New("Medio Ambiente: Iniciativa para la Conservación de la Fauna", "Se ha lanzado una iniciativa para la conservación de la fauna que busca proteger especies en peligro de extinción.", dateFormat.parse("01/02/2023")));
-            news.add(new New("Salud: Descubrimiento en la Investigación Médica", "Los investigadores médicos han anunciado un importante avance en la investigación de una enfermedad crónica común.", dateFormat.parse("10/01/2023")));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+            products.add(new Product("Laptop", 999.99, 5));
+            products.add(new Product("Teléfono", 299.99, 10));
+            products.add(new Product("Tablet", 199.99, 8));
+            products.add(new Product("Cámara", 149.99, 15));
+            products.add(new Product("Auriculares", 49.99, 20));
+            products.add(new Product("Teclado", 29.99, 30));
+            products.add(new Product("Mouse", 19.99, 25));
+            products.add(new Product("Monitor", 199.99, 12));
+            products.add(new Product("Impresora", 149.99, 8));
+            products.add(new Product("Altavoces", 79.99, 18));
+            products.add(new Product("Micrófono", 39.99, 15));
+            products.add(new Product("Disco Duro", 79.99, 10));
+            products.add(new Product("Memoria RAM", 49.99, 22));
+            products.add(new Product("Router", 39.99, 17));
+            products.add(new Product("Tarjeta Gráfica", 129.99, 7));
+            products.add(new Product("Batería Externa", 29.99, 25));
+            products.add(new Product("Mochila para Laptop", 34.99, 20));
+            products.add(new Product("Funda para Teléfono", 14.99, 30));
+            products.add(new Product("Cable USB", 9.99, 40));
+            products.add(new Product("Adaptador de Corriente", 19.99, 15));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         listView.setCellFactory(new Callback<>() {
             @Override
-            public ListCell<New> call(ListView<New> param) {
+            public ListCell<Product> call(ListView<Product> param) {
                 return new ListCell<>() {
                     @Override
-                    protected void updateItem(New item, boolean empty) {
+                    protected void updateItem(Product item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item != null) {
-                            setText(item.getTitle() + " - " + item.getBody().length());
+                            setText(item.getName() + " - $" + item.getPrice() + " (" + item.getStock() + ")");
                         } else {
                             setText("");
                         }
@@ -50,6 +56,6 @@ public class PrimaryController {
             }
         });
 
-        listView.setItems(news);
+        listView.setItems(products);
     }
 }
