@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="360.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Login">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@appIcon.png" />
+         </image>
+      </ImageView>
+      <MFXTextField floatMode="BORDER" floatingText="Usuario" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </MFXTextField>
+      <MFXPasswordField floatMode="BORDER" floatingText="Contraseña" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </MFXPasswordField>
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</VBox>
