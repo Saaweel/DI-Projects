@@ -1,3 +1,12 @@
 .mfx-text-field {
-	-mfx-main: #00CFFF;
+	-mfx-main: white;
+	-fx-background-color:  #353940;
+	-fx-border-color: none;
+	-fx-text-fill: white;
+	-fx-padding: 7;
+}
+
+.mfx-text-field .floating-text {
+	-fx-text-fill: white;
+	-fx-background-color: none;
 }
