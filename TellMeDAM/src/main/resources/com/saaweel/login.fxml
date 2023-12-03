@@ -2,36 +2,50 @@
 
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="360.0" prefWidth="640.0" style="-fx-background-color: white; -fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Login">
-   <children>
-      <VBox alignment="CENTER" maxWidth="400.0" style="-fx-background-color: #444851; -fx-background-radius: 5.0;">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@appIcon.png" />
-               </image>
-            </ImageView>
-            <MFXTextField floatMode="BORDER" floatingText="Usuario" maxWidth="1.7976931348623157E308">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </MFXTextField>
-            <MFXPasswordField floatMode="BORDER" floatingText="Contraseña" maxWidth="1.7976931348623157E308">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </MFXPasswordField>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </children>
    <padding>
       <Insets top="10.0" />
    </padding>
+   <VBox alignment="CENTER" maxWidth="400.0" style="-fx-background-color: #444851; -fx-background-radius: 5.0;">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@appIcon.png" />
+      </ImageView>
+      <MFXTextField fx:id="userField" floatMode="BORDER" floatingText="Usuario" managed="false" maxWidth="1.7976931348623157E308" visible="false">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </MFXTextField>
+      <MFXTextField fx:id="emailField" floatMode="BORDER" floatingText="Correo electrónico" maxWidth="1.7976931348623157E308">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </MFXTextField>
+      <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Contraseña" maxWidth="1.7976931348623157E308">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </MFXPasswordField>
+      <MFXButton fx:id="button1" buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#onButton1" style="-fx-background-color: #5767ea; -fx-text-fill: white;" text="Iniciar sesión">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+         </padding>
+      </MFXButton>
+      <MFXButton fx:id="button2" buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#onButton2" style="-fx-background-color: #353940; -fx-text-fill: white; -fx-border-color: #5767ea; -fx-border-radius: 5;" text="Registrarse">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+         </padding>
+      </MFXButton>
+   </VBox>
 </VBox>
