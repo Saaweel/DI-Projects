@@ -5,9 +5,9 @@ import org.example.api.model.User;
 public final class UserSession {
     private static UserSession instance;
 
-    private String user;
+    private User user;
 
-    private UserSession(String user) {
+    private UserSession(User user) {
         this.user = user;
     }
 
@@ -15,7 +15,7 @@ public final class UserSession {
         return instance;
     }
 
-    public static UserSession setInstance(String user) {
+    public static UserSession setInstance(User user) {
         if (instance != null) {
             return instance;
         }
@@ -25,11 +25,11 @@ public final class UserSession {
         return instance;
     }
 
-    public String getUserName() {
+    public User getUser() {
         return user;
     }
 
-    public void cleanUserSession() {
+    public void clearUserSession() {
         user = null;
     }
 }

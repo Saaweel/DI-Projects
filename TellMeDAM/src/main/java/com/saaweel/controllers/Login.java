@@ -1,11 +1,17 @@
 package com.saaweel.controllers;
 
+import com.saaweel.UserSession;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.layout.VBox;
+import org.example.api.APICallback;
 import org.example.api.UserAPIClient;
 
 import com.saaweel.App;
+import org.example.api.model.User;
+import org.example.api.model.Error;
+
+import java.io.IOException;
 
 public class Login {
     private boolean register = false;
@@ -23,7 +29,7 @@ public class Login {
         userApi = new UserAPIClient();
     }
 
-    public void onButton1() {
+    public void onButton1() throws IOException, InterruptedException {
         String username = userField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -53,9 +59,59 @@ public class Login {
         }
 
         if (register) {
-            System.out.println("Registro");
+            userApi.register(email, username, password, new APICallback() {
+                @Override
+                public void onSuccess(Object response) {
+                    if (response instanceof User) {
+                        User user = (User) response;
+
+                        UserSession session = UserSession.setInstance(user);
+
+                        if (session != null) {
+                            try {
+                                App.setRoot("main");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(Object response) {
+                    if (response instanceof Error) {
+                        Error error = (Error) response;
+                        App.showNotification("Error al registrarse", error.getError());
+                    }
+                }
+            });
         } else {
-            System.out.println("Login");
+            userApi.login(email, password, new APICallback() {
+                @Override
+                public void onSuccess(Object response) {
+                    if (response instanceof User) {
+                        User user = (User) response;
+
+                        UserSession session = UserSession.setInstance(user);
+
+                        if (session != null) {
+                            try {
+                                App.setRoot("main");
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onError(Object response) {
+                    if (response instanceof Error) {
+                        Error error = (Error) response;
+                        App.showNotification("Error al iniciar sesión", error.getError());
+                    }
+                }
+            });
         }
     }
 
