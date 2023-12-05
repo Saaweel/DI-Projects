@@ -1,0 +1,16 @@
+.notification {
+	-fx-background-color: white;
+	-fx-background-radius: 5;
+	-fx-border-color: #ebebeb;
+	-fx-border-radius: 5;
+}
+
+.notification .label {
+	-fx-font-family: 'Open Sans Bold';
+	-fx-text-fill: black;
+}
+
+.notification .content {
+	-fx-padding: 10;
+	-fx-font-family: 'Open Sans SemiBold';
+}

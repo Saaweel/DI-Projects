@@ -8,6 +8,7 @@ module com.saaweel {
     requires okhttp3.logging;
     requires java.net.http;
     requires MaterialFX;
+    requires mfx.resources;
 
     opens org.example.api to com.google.gson, javafx.fxml;
     opens org.example.api.model to com.google.gson;

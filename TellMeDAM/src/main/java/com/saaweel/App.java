@@ -1,6 +1,12 @@
 package com.saaweel;
 
+import io.github.palexdev.materialfx.controls.MFXNotificationCenter;
+import io.github.palexdev.materialfx.controls.cell.MFXNotificationCell;
+import io.github.palexdev.materialfx.enums.NotificationPos;
+import io.github.palexdev.materialfx.notifications.MFXNotificationCenterSystem;
+import io.github.palexdev.materialfx.notifications.MFXNotificationSystem;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +26,12 @@ public class App extends Application {
 
     private static Scene scene;
 
+    public static void showNotification(String header, String text) {
+        MFXNotificationSystem notiSys =MFXNotificationSystem.instance();
+        notiSys.initOwner(getScene().getWindow());
+        notiSys.setPosition(NotificationPos.TOP_LEFT).publish(new Notification(header, text));
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("main"));
@@ -33,11 +45,16 @@ public class App extends Application {
         stage.setMaximized(true);
 
         stage.show();
+
+        Platform.runLater(() -> {
+            MFXNotificationSystem.instance().initOwner(scene.getWindow());
+        });
     }
 
     public static void setRoot(String fxml) throws IOException {
         synchronized (waitingForSceneLoad) {
             scene.setRoot(loadFXML(fxml));
+
             waitingForSceneLoad.notifyAll();
         }
     }

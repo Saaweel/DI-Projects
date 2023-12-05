@@ -2,14 +2,14 @@
 
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+
 <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="360.0" prefWidth="640.0" style="-fx-background-color: white; -fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Login">
    <padding>
       <Insets top="10.0" />
    </padding>
-   <VBox alignment="CENTER" maxWidth="400.0" style="-fx-background-color: #444851; -fx-background-radius: 5.0;">
+   <VBox fx:id="loginForm" alignment="CENTER" maxWidth="400.0" style="-fx-background-color: #444851; -fx-background-radius: 5.0;">
       <padding>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
       </padding>
