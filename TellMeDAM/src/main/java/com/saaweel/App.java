@@ -1,9 +1,6 @@
 package com.saaweel;
 
-import io.github.palexdev.materialfx.controls.MFXNotificationCenter;
-import io.github.palexdev.materialfx.controls.cell.MFXNotificationCell;
 import io.github.palexdev.materialfx.enums.NotificationPos;
-import io.github.palexdev.materialfx.notifications.MFXNotificationCenterSystem;
 import io.github.palexdev.materialfx.notifications.MFXNotificationSystem;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import okhttp3.internal.Util;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -27,9 +22,9 @@ public class App extends Application {
     private static Scene scene;
 
     public static void showNotification(String header, String text) {
-        MFXNotificationSystem notiSys =MFXNotificationSystem.instance();
-        notiSys.initOwner(getScene().getWindow());
-        notiSys.setPosition(NotificationPos.TOP_LEFT).publish(new Notification(header, text));
+        MFXNotificationSystem notySys =MFXNotificationSystem.instance();
+        notySys.initOwner(getScene().getWindow());
+        notySys.setPosition(NotificationPos.TOP_LEFT).publish(new Notification(header, text));
     }
 
     @Override
@@ -46,9 +41,7 @@ public class App extends Application {
 
         stage.show();
 
-        Platform.runLater(() -> {
-            MFXNotificationSystem.instance().initOwner(scene.getWindow());
-        });
+        Platform.runLater(() -> MFXNotificationSystem.instance().initOwner(scene.getWindow()));
     }
 
     public static void setRoot(String fxml) throws IOException {
