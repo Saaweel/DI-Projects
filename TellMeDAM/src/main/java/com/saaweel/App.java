@@ -49,16 +49,30 @@ public class App extends Application {
 
                         setMyUser(user);
                     }
+
+                    try {
+                        startInternal(stage);
+                    } catch (IOException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
                 @Override
                 public void onError(Object response) {
                     preferences.put("UserEmail", null);
                     preferences.put("UserPass", null);
+
+                    try {
+                        startInternal(stage);
+                    } catch (IOException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
         }
+    }
 
+    private void startInternal(Stage stage) throws IOException, InterruptedException {
         scene = new Scene(loadFXML("main"));
         stage.setScene(scene);
 
