@@ -15,3 +15,7 @@
     -fx-background-color: #5767ea;
     -fx-border-color: none;
 }
+
+.split-pane > .split-pane-divider {
+    -fx-background-color:  #444851;
+}
