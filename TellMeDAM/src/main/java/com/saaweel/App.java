@@ -9,14 +9,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.example.api.APICallback;
+import org.example.api.UserAPIClient;
+import org.example.api.model.Error;
+import org.example.api.model.User;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
+    public static User myUser;
     public static final Object waitingForSceneLoad = new Object();
 
     private static Scene scene;
@@ -28,7 +34,31 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
+        Preferences preferences = Preferences.userNodeForPackage(App.class);
+        String userEmail = preferences.get("UserEmail", null);
+        String userPass = preferences.get("UserPass", null);
+
+        if (userEmail != null && userPass != null) {
+            UserAPIClient userApi = new UserAPIClient();
+            userApi.login(userEmail, userPass, new APICallback() {
+                @Override
+                public void onSuccess(Object response) {
+                    if (response instanceof User) {
+                        User user = (User) response;
+
+                        setMyUser(user);
+                    }
+                }
+
+                @Override
+                public void onError(Object response) {
+                    preferences.put("UserEmail", null);
+                    preferences.put("UserPass", null);
+                }
+            });
+        }
+
         scene = new Scene(loadFXML("main"));
         stage.setScene(scene);
 
@@ -65,4 +95,11 @@ public class App extends Application {
         launch();
     }
 
+    public static User getMyUser() {
+        return myUser;
+    }
+
+    public static void setMyUser(User u) {
+        myUser = u;
+    }
 }

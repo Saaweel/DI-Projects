@@ -1,6 +1,5 @@
 package com.saaweel.controllers;
 
-import com.saaweel.UserSession;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.layout.VBox;
@@ -12,6 +11,7 @@ import org.example.api.model.User;
 import org.example.api.model.Error;
 
 import java.io.IOException;
+import java.util.prefs.Preferences;
 
 public class Login {
     private boolean register = false;
@@ -65,15 +65,7 @@ public class Login {
                     if (response instanceof User) {
                         User user = (User) response;
 
-                        UserSession session = UserSession.setInstance(user);
-
-                        if (session != null) {
-                            try {
-                                App.setRoot("main");
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+                        joinApp(user);
                     }
                 }
 
@@ -92,15 +84,7 @@ public class Login {
                     if (response instanceof User) {
                         User user = (User) response;
 
-                        UserSession session = UserSession.setInstance(user);
-
-                        if (session != null) {
-                            try {
-                                App.setRoot("main");
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+                        joinApp(user);
                     }
                 }
 
@@ -133,5 +117,19 @@ public class Login {
             button1.setText("Registrarte");
             button2.setText("Iniciar sesión");
         }
+    }
+
+    private void joinApp(User user) {
+        App.setMyUser(user);
+
+        try {
+            App.setRoot("main");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Preferences preferences = Preferences.userNodeForPackage(App.class);
+        preferences.put("UserEmail", user.getEmail());
+        preferences.put("UserPass", user.getPassword());
     }
 }

@@ -9,12 +9,14 @@ module com.saaweel {
     requires java.net.http;
     requires MaterialFX;
     requires mfx.resources;
+    requires java.prefs;
 
     opens org.example.api to com.google.gson, javafx.fxml;
     opens org.example.api.model to com.google.gson;
     opens com.saaweel to javafx.fxml;
     exports com.saaweel;
     exports org.example.api;
+    exports org.example.api.model;
     exports com.saaweel.controllers;
     opens com.saaweel.controllers to javafx.fxml;
 }

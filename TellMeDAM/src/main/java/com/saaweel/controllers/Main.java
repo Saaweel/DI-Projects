@@ -1,7 +1,7 @@
 package com.saaweel.controllers;
 
-import com.saaweel.UserSession;
 import com.saaweel.App;
+import org.example.api.model.User;
 
 import java.io.IOException;
 
@@ -18,9 +18,9 @@ public class Main {
                 }
             }
 
-            UserSession session = UserSession.getInstance();
+            User user = App.getMyUser();
 
-            if (session == null) {
+            if (user == null) {
                 try {
                     App.setRoot("login");
                 } catch (IOException e) {
