@@ -6,6 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.example.api.APICallback;
 import org.example.api.ChatAPIClient;
 import org.example.api.model.Chat;
@@ -17,6 +20,7 @@ import java.util.List;
 
 public class Main {
     public ListView<Chat> chatListView;
+    public TextField messageTextField;
     private ObservableList<Chat> chatList;
     private ChatAPIClient chatApi;
     public void initialize() {
@@ -83,5 +87,11 @@ public class Main {
 
     public void newChat() {
         System.out.println("Nuevo chat");
+    }
+
+    public void handleKeyPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            System.out.println("Mensaje");
+        }
     }
 }
