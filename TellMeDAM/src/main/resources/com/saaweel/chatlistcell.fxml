@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 10; -fx-background-color: #444851; -fx-background-radius: 5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.ChatListCellController">
+   <children>
+      <Label fx:id="chatName" style="-fx-text-fill: white;" text="Label" />
+   </children>
+</HBox>

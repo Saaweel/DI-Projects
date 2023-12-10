@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
-  <items>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="200.0" />
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
-  </items>
-</SplitPane>
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
+   <HBox maxWidth="1.7976931348623157E308" styleClass="actionBar">
+      <children>
+         <Button mnemonicParsing="false" onAction="#newChat" style="-fx-text-fill: white; -fx-background-color: #5767ea;" text="+ Nuevo chat" />
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+   </HBox>
+    <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" VBox.vgrow="ALWAYS">
+        <ListView fx:id="chatListView" maxWidth="500.0" minWidth="200.0" style="-fx-background-color: transparent;">
+            <padding>
+                <Insets top="5.0" />
+            </padding>
+        </ListView>
+        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+    </SplitPane>
+</VBox>

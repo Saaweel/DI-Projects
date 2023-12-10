@@ -17,5 +17,26 @@
 }
 
 .split-pane > .split-pane-divider {
-    -fx-background-color:  #444851;
+    -fx-background-color: #444851;
+}
+
+.list-view .scroll-bar:vertical .track {
+    -fx-background-color: #444851;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #353940;
+    -fx-background-radius: 4;
+}
+
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #444851;
+    -fx-background-insets: 0;
+}
+
+.actionBar {
+   -fx-border-style: solid inside;
+   -fx-border-width: 0 0 2 0;
+   -fx-border-color: #444851;
 }
