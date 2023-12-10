@@ -25,7 +25,30 @@
                 <Insets top="5.0" />
             </padding>
         </ListView>
-        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <BorderPane fx:id="chatPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <top>
+                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 10; -fx-background-color: #444851; -fx-background-radius: 5;">
+                    <Label fx:id="chatName" style="-fx-text-fill: white;" text="Label" />
+                   <BorderPane.margin>
+                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                   </BorderPane.margin>
+                </HBox>
+            </top>
+            <center>
+                <VBox fx:id="chatMessages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" styleClass="chat-messages">
+                    <VBox styleClass="message">
+                        <Label text="Tucci" styleClass="message-user" />
+                        <Label text="Test" styleClass="message-content" />
+                    </VBox>
+                    <VBox styleClass="message">
+                        <Label text="Saaweel" styleClass="message-user" />
+                        <Label text="Test" styleClass="message-content" />
+                    </VBox>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </VBox>
+            </center>
             <bottom>
                 <TextField fx:id="messageTextField" onKeyPressed="#handleKeyPress" styleClass="input-message">
                 <BorderPane.margin>

@@ -55,3 +55,16 @@
 .text-field.input-message:focused {
     -fx-border-color: #5767ea;
 }
+
+.message {
+    -fx-padding: 5;
+}
+
+.message-user {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.message-content {
+    -fx-text-fill: white;
+}
