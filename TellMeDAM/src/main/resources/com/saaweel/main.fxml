@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
+<VBox fx:id="mainFrame" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
     <HBox maxWidth="1.7976931348623157E308" styleClass="actionBar">
         <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -25,7 +25,7 @@
                 <Insets top="5.0" />
             </padding>
         </ListView>
-        <BorderPane fx:id="chatPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+        <BorderPane fx:id="chatPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false">
             <top>
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 10; -fx-background-color: #444851; -fx-background-radius: 5;">
                     <Label fx:id="chatName" style="-fx-text-fill: white;" text="Label" />
@@ -37,12 +37,12 @@
             <center>
                 <VBox fx:id="chatMessages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" styleClass="chat-messages">
                     <VBox styleClass="message">
-                        <Label text="Tucci" styleClass="message-user" />
-                        <Label text="Test" styleClass="message-content" />
+                        <Label styleClass="message-user" text="Tucci" />
+                        <Label styleClass="message-content" text="Test" />
                     </VBox>
                     <VBox styleClass="message">
-                        <Label text="Saaweel" styleClass="message-user" />
-                        <Label text="Test" styleClass="message-content" />
+                        <Label styleClass="message-user" text="Saaweel" />
+                        <Label styleClass="message-content" text="Test" />
                     </VBox>
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
