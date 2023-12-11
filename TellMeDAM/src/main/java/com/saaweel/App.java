@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.example.api.APICallback;
 import org.example.api.UserAPIClient;
-import org.example.api.model.Error;
 import org.example.api.model.User;
 
 import java.io.IOException;
