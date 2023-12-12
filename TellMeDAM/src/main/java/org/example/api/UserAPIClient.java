@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import javafx.application.Platform;
-import org.example.api.model.Chat;
 import org.example.api.model.Error;
 import org.example.api.model.User;
 
@@ -56,6 +55,80 @@ public class UserAPIClient extends RootAPIClient {
                 throw new RuntimeException(e);
             }
         }).start();
+    }
+
+    public void getUserById(Integer userId, APICallback callback) throws IOException, InterruptedException {
+        new Thread(() -> {
+            try {
+                doGetUserById(userId, callback);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void updateUser(Integer userId, String username, String password, String email, String photoUrl, APICallback callback) throws IOException, InterruptedException {
+        new Thread(() -> {
+            try {
+                doUpdateUser(userId, username, password, email, photoUrl, callback);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    public void deleteUserAndChats(Integer userId, APICallback callback) throws IOException, InterruptedException {
+        new Thread(() -> {
+            try {
+                doDeleteUserAndChats(userId, callback);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    private void doDeleteUserAndChats(Integer userId, APICallback callback) throws IOException, InterruptedException {
+        String url = BASE_URL + "/users/" + userId;
+        HttpResponse<String> response = doDELETERequest(url);
+
+        if (response.statusCode() == 200) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(response.body(), User.class);
+            onSuccess(callback, user);
+        } else {
+            Gson gson = new Gson();
+            Error error = gson.fromJson(response.body(), Error.class);
+            onError(callback, error);
+        }
+    }
+
+    private void doUpdateUser(Integer userId, String username, String password, String email, String photoUrl, APICallback callback) throws IOException, InterruptedException {
+        String url = BASE_URL + "/users/" + userId;
+        String requestBody = "{\"email\":\"" + email + "\",\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"photourl\":\"" + photoUrl + "\"}";
+        HttpResponse<String> response = doPUTRequest(url, requestBody);
+        if (response.statusCode() == 200) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(response.body(), User.class);
+            onSuccess(callback, user);
+        } else {
+            Gson gson = new Gson();
+            Error error = gson.fromJson(response.body(), Error.class);
+            onError(callback, error);
+        }
+    }
+
+    private void doGetUserById(Integer userId, APICallback callback) throws IOException, InterruptedException {
+        String url = BASE_URL + "/users/" + userId;
+        HttpResponse<String> response = doGETRequest(url);
+        if (response.statusCode() == 200) {
+            Gson gson = new Gson();
+            User user = gson.fromJson(response.body(), User.class);
+            onSuccess(callback, user);
+        } else {
+            Gson gson = new Gson();
+            Error error = gson.fromJson(response.body(), Error.class);
+            onError(callback, error);
+        }
     }
 
     private void doLogin(String email, String password, APICallback callback) throws IOException, InterruptedException {
