@@ -3,8 +3,11 @@ package com.saaweel.controllers;
 import com.saaweel.App;
 import com.saaweel.ChatListCell;
 import com.saaweel.UserListCell;
+import io.github.palexdev.materialfx.controls.MFXContextMenu;
+import io.github.palexdev.materialfx.controls.MFXContextMenuItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -41,6 +45,7 @@ public class Main {
     private MessageAPIClient messageApi;
     private NotificationAPIClient notyApi;
     private Chat chatOpened;
+    private boolean isRightClick;
     public void initialize() {
         myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
         myPhoto.setImage(new Image(App.getMyUser().getPhotourl()));
@@ -51,8 +56,66 @@ public class Main {
 
         chatListView.setCellFactory(param -> new ChatListCell());
 
+        chatListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (event.isSecondaryButtonDown()) {
+                isRightClick = true;
+            }
+        });
+
         chatListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                if (isRightClick) {
+                    MFXContextMenu menu = new MFXContextMenu(chatListView);
+
+                    MFXContextMenuItem clearItem = new MFXContextMenuItem("Limpiar chat");
+                    clearItem.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                        if (event.isPrimaryButtonDown()) {
+                            chatApi.cleanChat(newValue.getId(), new APICallback() {
+                                @Override
+                                public void onSuccess(Object response) {
+                                    chatMessages.getChildren().clear();
+                                }
+
+                                @Override
+                                public void onError(Object response) {
+                                    if (response instanceof Error) {
+                                        Error error = (Error) response;
+                                        App.showNotification("Error al limpiar el chat", error.getError());
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    MFXContextMenuItem deleteItem = new MFXContextMenuItem("Eliminar chat");
+                    deleteItem.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                        if (event.isPrimaryButtonDown()) {
+                            chatApi.deleteChat(newValue.getId(), new APICallback() {
+                                @Override
+                                public void onSuccess(Object response) {
+                                    chatPane.setVisible(false);
+                                    chatList.remove(newValue);
+                                }
+
+                                @Override
+                                public void onError(Object response) {
+                                    if (response instanceof Error) {
+                                        Error error = (Error) response;
+                                        App.showNotification("Error al borrar el chat", error.getError());
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    menu.addItem(clearItem);
+                    menu.addItem(deleteItem);
+
+                    menu.install();
+
+                    isRightClick = false;
+                }
+
                 openChatContent(newValue, false);
             }
         });
