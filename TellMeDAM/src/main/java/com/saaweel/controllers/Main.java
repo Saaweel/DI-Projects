@@ -204,8 +204,6 @@ public class Main {
                         List<Message> messages = (List<Message>) response;
 
                         for (Message message: messages) {
-                            System.out.println(message.getContent());
-
                             addMessage(message.getIdsender(), message.getContent());
                         }
                     }
