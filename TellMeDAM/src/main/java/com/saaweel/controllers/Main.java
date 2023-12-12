@@ -9,10 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.example.api.*;
 import org.example.api.model.Chat;
@@ -32,6 +34,7 @@ public class Main {
     public BorderPane chatPane;
     public VBox chatMessages;
     public VBox mainFrame;
+    public ImageView myPhoto;
     private ObservableList<Chat> chatList;
     private UserAPIClient userApi;
     private ChatAPIClient chatApi;
@@ -39,6 +42,9 @@ public class Main {
     private NotificationAPIClient notyApi;
     private Chat chatOpened;
     public void initialize() {
+        myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
+        myPhoto.setImage(new Image(App.getMyUser().getPhotourl()));
+
         chatList = FXCollections.observableArrayList();
 
         chatListView.setItems(chatList);

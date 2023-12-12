@@ -3,13 +3,21 @@
 <?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox fx:id="mainFrame" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
-    <HBox maxWidth="1.7976931348623157E308" styleClass="actionBar">
+    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" styleClass="actionBar">
         <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </padding>
+        <ImageView fx:id="myPhoto" fitWidth="35.0" pickOnBounds="true" preserveRatio="true"
+                   style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+            <HBox.margin>
+                <Insets right="10.0"/>
+            </HBox.margin>
+            <Image url="@appIcon.png"/>
+        </ImageView>
         <MFXButton buttonType="RAISED" onAction="#newChat" style="-fx-background-color: #5767ea; -fx-text-fill: white;" text="+ Nuevo chat">
             <VBox.margin>
                 <Insets top="10.0" />
