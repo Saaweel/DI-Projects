@@ -53,7 +53,7 @@ public class App extends Application {
                     }
 
                     try {
-                        startInternal(stage);
+                        startInternal(stage, true);
                     } catch (IOException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -65,12 +65,14 @@ public class App extends Application {
                     preferences.put("UserPass", null);
 
                     try {
-                        startInternal(stage);
+                        startInternal(stage, false);
                     } catch (IOException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
             });
+        } else {
+            startInternal(stage, false);
         }
     }
 
@@ -85,10 +87,10 @@ public class App extends Application {
         stage.show();
     }
 
-    private void startInternal(Stage stage) throws IOException, InterruptedException {
+    private void startInternal(Stage stage, boolean logged) throws IOException, InterruptedException {
         stage.hide();
 
-        scene = new Scene(loadFXML("main"));
+        scene = new Scene(logged ?loadFXML("main") : loadFXML("login"));
         stage.setScene(scene);
 
         stage.setMaximized(true);

@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 public class Main {
     public ListView<Chat> chatListView;
@@ -47,7 +48,6 @@ public class Main {
     private Chat chatOpened;
     public void initialize() {
         myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
-        myPhoto.setImage(new Image(App.getMyUser().getPhotourl()));
 
         chatList = FXCollections.observableArrayList();
 
@@ -95,6 +95,8 @@ public class Main {
     }
 
     private void loadMainInfo(User user) {
+        myPhoto.setImage(new Image(user.getPhotourl()));
+
         chatApi.getAllChatsFromUser(user.getId(), new APICallback() {
             @Override
             @SuppressWarnings("unchecked cast")
@@ -170,10 +172,21 @@ public class Main {
 
         MFXContextMenu menu = new MFXContextMenu(myPhoto);
 
+        menu.getStyleSheets().add(String.valueOf(getClass().getResource("/com/saaweel/custom.css")));
+
         MFXContextMenuItem exitSession = new MFXContextMenuItem("Cerrar sesión");
         exitSession.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
-                System.out.println("Cerrar sesión");
+                try {
+                    Preferences preferences = Preferences.userNodeForPackage(App.class);
+                    preferences.remove("UserEmail");
+                    preferences.remove("UserPass");
+
+                    App.setMyUser(null);
+                    App.setRoot("login");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
