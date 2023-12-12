@@ -7,10 +7,11 @@ import io.github.palexdev.materialfx.controls.MFXContextMenu;
 import io.github.palexdev.materialfx.controls.MFXContextMenuItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -174,6 +175,15 @@ public class Main {
 
         menu.getStyleSheets().add(String.valueOf(getClass().getResource("/com/saaweel/custom.css")));
 
+        MFXContextMenuItem modifyData = new MFXContextMenuItem("Modificar datos personales");
+        modifyData.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (event.isPrimaryButtonDown()) {
+                // TODO: Abrir modal para modificar datos personales
+
+                System.out.println("Modificar datos personales");
+            }
+        });
+
         MFXContextMenuItem exitSession = new MFXContextMenuItem("Cerrar sesión");
         exitSession.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
@@ -190,6 +200,7 @@ public class Main {
             }
         });
 
+        menu.addItem(modifyData);
         menu.addItem(exitSession);
 
         menu.install();

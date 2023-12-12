@@ -15,13 +15,11 @@ import org.example.api.ChatAPIClient;
 import org.example.api.model.Chat;
 import org.example.api.model.Error;
 
-import javax.swing.border.Border;
-
 public class ChatListCell extends ListCell<Chat> {
-    private Chat chatOpened;
-    private BorderPane chatPane;
-    private VBox chatMessages;
-    private ObservableList<Chat> chatList;
+    private final Chat chatOpened;
+    private final BorderPane chatPane;
+    private final VBox chatMessages;
+    private final ObservableList<Chat> chatList;
     public ChatListCell(BorderPane chatPane, VBox chatMessages, ObservableList<Chat> chatList, Chat chatOpened) {
         this.chatPane = chatPane;
         this.chatMessages = chatMessages;

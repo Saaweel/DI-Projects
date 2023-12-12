@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.example.api.APICallback;
 import org.example.api.UserAPIClient;
 import org.example.api.model.User;
@@ -76,7 +75,7 @@ public class App extends Application {
         }
     }
 
-    private void showStartingApp(Stage stage) throws IOException, InterruptedException {
+    private void showStartingApp(Stage stage) throws IOException {
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("appIcon.png")));
         stage.getIcons().add(icon);
 

@@ -1,7 +1,6 @@
 package com.saaweel.controllers;
 
 import javafx.scene.control.Label;
-import org.example.api.model.Chat;
 import org.example.api.model.User;
 
 public class UserListCellController {

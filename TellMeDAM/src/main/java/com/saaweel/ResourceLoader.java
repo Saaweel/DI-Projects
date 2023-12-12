@@ -19,9 +19,4 @@ public class ResourceLoader {
     public static String load(String path) {
         return loadURL(path).toString();
     }
-
-    public static InputStream loadStream(String name) {
-        return ResourceLoader.class.getResourceAsStream(name);
-    }
-
 }

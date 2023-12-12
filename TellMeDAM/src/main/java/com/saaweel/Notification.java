@@ -1,14 +1,11 @@
 package com.saaweel;
 
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXIconWrapper;
 import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
-import io.github.palexdev.materialfx.enums.NotificationState;
 import io.github.palexdev.materialfx.factories.InsetsFactory;
 import io.github.palexdev.mfxresources.fonts.IconDescriptor;
 import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
 import io.github.palexdev.mfxresources.fonts.fontawesome.FontAwesomeSolid;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
@@ -16,8 +13,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 
 public class Notification extends MFXSimpleNotification {
     public Notification(String headerText, String text) {
@@ -29,7 +24,7 @@ public class Notification extends MFXSimpleNotification {
         MFXIconWrapper icon = new MFXIconWrapper(fi, 32);
 
         Label headerLabel = new Label();
-        headerLabel.textProperty().bind(new SimpleStringProperty(headerText));;
+        headerLabel.textProperty().bind(new SimpleStringProperty(headerText));
 
         HBox header = new HBox(10, icon, headerLabel);
         header.setAlignment(Pos.CENTER_LEFT);
