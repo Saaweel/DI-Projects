@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.example.api.APICallback;
 import org.example.api.UserAPIClient;
 import org.example.api.model.User;
@@ -37,6 +38,8 @@ public class App extends Application {
         Preferences preferences = Preferences.userNodeForPackage(App.class);
         String userEmail = preferences.get("UserEmail", null);
         String userPass = preferences.get("UserPass", null);
+
+        showStartingApp(stage);
 
         if (userEmail != null && userPass != null) {
             UserAPIClient userApi = new UserAPIClient();
@@ -71,14 +74,22 @@ public class App extends Application {
         }
     }
 
-    private void startInternal(Stage stage) throws IOException, InterruptedException {
-        scene = new Scene(loadFXML("main"));
-        stage.setScene(scene);
-
+    private void showStartingApp(Stage stage) throws IOException, InterruptedException {
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("appIcon.png")));
         stage.getIcons().add(icon);
 
         stage.setTitle("TellMeDAM");
+
+        stage.setScene(new Scene(loadFXML("starting_app")));
+
+        stage.show();
+    }
+
+    private void startInternal(Stage stage) throws IOException, InterruptedException {
+        stage.hide();
+
+        scene = new Scene(loadFXML("main"));
+        stage.setScene(scene);
 
         stage.setMaximized(true);
 
