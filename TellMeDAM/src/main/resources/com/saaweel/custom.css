@@ -20,17 +20,17 @@
     -fx-background-color: #444851;
 }
 
-.list-view .scroll-bar:vertical .track {
+.scroll-bar:vertical .track {
     -fx-background-color: #444851;
 }
 
-.list-view .scroll-bar:vertical .thumb {
+.scroll-bar:vertical .thumb {
     -fx-background-color: #353940;
     -fx-background-radius: 4;
 }
 
-.list-view .scroll-bar:vertical .increment-button,
-.list-view .scroll-bar:vertical .decrement-button {
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
     -fx-background-color: #444851;
     -fx-background-insets: 0;
 }

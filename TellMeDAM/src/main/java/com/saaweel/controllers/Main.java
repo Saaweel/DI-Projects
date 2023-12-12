@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +23,7 @@ import org.example.api.model.User;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Main {
     public ListView<Chat> chatListView;
@@ -122,14 +124,14 @@ public class Main {
                                 if (chatFromList.getId() == chat.getId()) {
                                     founded = true;
 
-                                    if (chatOpened.getId() == chat.getId()) {
+                                    if (chatOpened != null && chatOpened.getId() == chat.getId()) {
                                         myChatUpdated = true;
 
                                         openChatContent(chat, true);
                                     } else {
                                         stringList.append(" - ").append(getNameFromChat(chat)).append("\n");
                                     }
-                                    
+
                                     break;
                                 }
                             }
@@ -141,7 +143,7 @@ public class Main {
                         int chatsUpdated = chats.size() - (myChatUpdated ? 1 : 0);
 
                         if (chatsUpdated > 0) {
-                            App.showNotification("Actualizaciones de chats", "Tienes actualizaciones en " + chatsUpdated + " chats: " + stringList);
+                            App.showNotification("Actualizaciones de chats", "Tienes actualizaciones en " + chatsUpdated + " chats: \n" + stringList);
                         }
                     }
                 }
@@ -176,6 +178,11 @@ public class Main {
                     root.setCellFactory(param -> new UserListCell());
 
                     Stage menuStage = new Stage();
+
+                    menuStage.setTitle("Seleccionar contacto");
+                    Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/saaweel/appIcon.png")));
+                    menuStage.getIcons().add(icon);
+
                     menuStage.setScene(new Scene(root));
                     menuStage.show();
 
