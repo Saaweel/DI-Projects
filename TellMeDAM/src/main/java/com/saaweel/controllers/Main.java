@@ -45,7 +45,6 @@ public class Main {
     private MessageAPIClient messageApi;
     private NotificationAPIClient notyApi;
     private Chat chatOpened;
-    private boolean isRightClick;
     public void initialize() {
         myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
         myPhoto.setImage(new Image(App.getMyUser().getPhotourl()));
@@ -54,68 +53,10 @@ public class Main {
 
         chatListView.setItems(chatList);
 
-        chatListView.setCellFactory(param -> new ChatListCell());
-
-        chatListView.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-            if (event.isSecondaryButtonDown()) {
-                isRightClick = true;
-            }
-        });
+        chatListView.setCellFactory(param -> new ChatListCell(chatPane, chatMessages, chatList, chatOpened));
 
         chatListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                if (isRightClick) {
-                    MFXContextMenu menu = new MFXContextMenu(chatListView);
-
-                    MFXContextMenuItem clearItem = new MFXContextMenuItem("Limpiar chat");
-                    clearItem.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                        if (event.isPrimaryButtonDown()) {
-                            chatApi.cleanChat(newValue.getId(), new APICallback() {
-                                @Override
-                                public void onSuccess(Object response) {
-                                    chatMessages.getChildren().clear();
-                                }
-
-                                @Override
-                                public void onError(Object response) {
-                                    if (response instanceof Error) {
-                                        Error error = (Error) response;
-                                        App.showNotification("Error al limpiar el chat", error.getError());
-                                    }
-                                }
-                            });
-                        }
-                    });
-
-                    MFXContextMenuItem deleteItem = new MFXContextMenuItem("Eliminar chat");
-                    deleteItem.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                        if (event.isPrimaryButtonDown()) {
-                            chatApi.deleteChat(newValue.getId(), new APICallback() {
-                                @Override
-                                public void onSuccess(Object response) {
-                                    chatPane.setVisible(false);
-                                    chatList.remove(newValue);
-                                }
-
-                                @Override
-                                public void onError(Object response) {
-                                    if (response instanceof Error) {
-                                        Error error = (Error) response;
-                                        App.showNotification("Error al borrar el chat", error.getError());
-                                    }
-                                }
-                            });
-                        }
-                    });
-
-                    menu.addItem(clearItem);
-                    menu.addItem(deleteItem);
-
-                    menu.install();
-
-                    isRightClick = false;
-                }
-
                 openChatContent(newValue, false);
             }
         });
@@ -226,6 +167,19 @@ public class Main {
                 }
             }
         });
+
+        MFXContextMenu menu = new MFXContextMenu(myPhoto);
+
+        MFXContextMenuItem exitSession = new MFXContextMenuItem("Cerrar sesión");
+        exitSession.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (event.isPrimaryButtonDown()) {
+                System.out.println("Cerrar sesión");
+            }
+        });
+
+        menu.addItem(exitSession);
+
+        menu.install();
     }
 
     public void newChat() throws IOException, InterruptedException {
