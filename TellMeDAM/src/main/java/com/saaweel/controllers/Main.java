@@ -6,8 +6,6 @@ import com.saaweel.UserListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -15,17 +13,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.example.api.APICallback;
-import org.example.api.ChatAPIClient;
-import org.example.api.MessageAPIClient;
-import org.example.api.UserAPIClient;
+import org.example.api.*;
 import org.example.api.model.Chat;
 import org.example.api.model.Error;
 import org.example.api.model.Message;
 import org.example.api.model.User;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -39,8 +34,8 @@ public class Main {
     private UserAPIClient userApi;
     private ChatAPIClient chatApi;
     private MessageAPIClient messageApi;
-
-    private Chat chatOpenned;
+    private NotificationAPIClient notyApi;
+    private Chat chatOpened;
     public void initialize() {
         chatList = FXCollections.observableArrayList();
 
@@ -50,7 +45,7 @@ public class Main {
 
         chatListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                openChatContent(newValue);
+                openChatContent(newValue, false);
             }
         });
 
@@ -59,6 +54,8 @@ public class Main {
         chatApi = new ChatAPIClient();
 
         messageApi = new MessageAPIClient();
+
+        notyApi= new NotificationAPIClient();
 
         new Thread(() -> {
             synchronized (App.waitingForSceneLoad) {
@@ -102,6 +99,59 @@ public class Main {
                 if (response instanceof Error) {
                     Error error = (Error) response;
                     App.showNotification("Error al cargar los chats", error.getError());
+                }
+            }
+        });
+
+        notyApi.observeNewMessages(App.getMyUser().getId(), new APICallback() {
+            @Override
+            @SuppressWarnings("unchecked cast")
+            public void onSuccess(Object response) {
+                if (response instanceof List) {
+                    List<Chat> chats = (List<Chat>) response;
+
+                    if (!chats.isEmpty()) {
+                        boolean myChatUpdated = false;
+
+                        StringBuilder stringList = new StringBuilder();
+
+                        for (Chat chat : chats) {
+                            boolean founded = false;
+
+                            for (Chat chatFromList : chatList) {
+                                if (chatFromList.getId() == chat.getId()) {
+                                    founded = true;
+
+                                    if (chatOpened.getId() == chat.getId()) {
+                                        myChatUpdated = true;
+
+                                        openChatContent(chat, true);
+                                    } else {
+                                        stringList.append(" - ").append(getNameFromChat(chat)).append("\n");
+                                    }
+                                    
+                                    break;
+                                }
+                            }
+
+                            if (!founded)
+                                chatList.add(chat);
+                        }
+
+                        int chatsUpdated = chats.size() - (myChatUpdated ? 1 : 0);
+
+                        if (chatsUpdated > 0) {
+                            App.showNotification("Actualizaciones de chats", "Tienes actualizaciones en " + chatsUpdated + " chats: " + stringList);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object response) {
+                if (response instanceof Error) {
+                    Error error = (Error) response;
+                    App.showNotification("Error al obtener las notificaciones", error.getError());
                 }
             }
         });
@@ -152,7 +202,7 @@ public class Main {
     private void openChat(User user) {
         for (Chat chat: chatList) {
             if (user.getId() == chat.getUser1_id() || user.getId() == chat.getUser2_id()) {
-                openChatContent(chat);
+                openChatContent(chat, false);
 
                 return;
             }
@@ -166,7 +216,7 @@ public class Main {
 
                     chatList.add(chat);
 
-                    openChatContent(chat);
+                    openChatContent(chat, false);
                 }
             }
 
@@ -180,8 +230,8 @@ public class Main {
         });
     }
 
-    private void openChatContent(Chat chat) {
-        chatOpenned = chat;
+    private void openChatContent(Chat chat, boolean onlyUpdate) {
+        chatOpened = chat;
 
         chatPane.setVisible(true);
 
@@ -192,8 +242,10 @@ public class Main {
 
         chatMessages.getChildren().clear();
 
-        messageTextField.clear();
-        messageTextField.requestFocus();
+        if (!onlyUpdate) {
+            messageTextField.clear();
+            messageTextField.requestFocus();
+        }
 
         try {
             messageApi.getMessagesFromChat(chat.getId(), new APICallback() {
@@ -202,6 +254,8 @@ public class Main {
                 public void onSuccess(Object response) {
                     if (response instanceof List) {
                         List<Message> messages = (List<Message>) response;
+
+                        messages.sort(Comparator.comparingInt(Message::getId));
 
                         for (Message message: messages) {
                             addMessage(message.getIdsender(), message.getContent());
@@ -224,7 +278,7 @@ public class Main {
 
     public void handleKeyPress(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode() == KeyCode.ENTER && !messageTextField.getText().isEmpty()) {
-            messageApi.sendMessageToChat(chatOpenned.getId(), messageTextField.getText(), App.getMyUser().getId(), new APICallback() {
+            messageApi.sendMessageToChat(chatOpened.getId(), messageTextField.getText(), App.getMyUser().getId(), new APICallback() {
                 @Override
                 public void onSuccess(Object response) {
                     if (response instanceof Message) {
@@ -247,8 +301,8 @@ public class Main {
         }
     }
 
-    private void addMessage(int idsender, String content) {
-        String username = idsender == chatOpenned.getUser1_id() ? chatOpenned.getUser1_username() : chatOpenned.getUser2_username();
+    private void addMessage(int sender, String content) {
+        String username = sender == chatOpened.getUser1_id() ? chatOpened.getUser1_username() : chatOpened.getUser2_username();
 
         VBox messageVBox = new VBox();
         messageVBox.getStyleClass().add("message");
@@ -262,5 +316,9 @@ public class Main {
         messageVBox.getChildren().addAll(userLabel, contentLabel);
 
         chatMessages.getChildren().add(messageVBox);
+    }
+
+    private String getNameFromChat(Chat chat) {
+        return chat.getUser1_id() != App.getMyUser().getId() ? chat.getUser1_username() : chat.getUser2_username();
     }
 }
