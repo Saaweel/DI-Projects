@@ -1,6 +1,7 @@
 package com.saaweel;
 
 import com.saaweel.controllers.ChatListCellController;
+import com.saaweel.controllers.Main;
 import io.github.palexdev.materialfx.controls.MFXContextMenu;
 import io.github.palexdev.materialfx.controls.MFXContextMenuItem;
 import javafx.collections.ObservableList;
@@ -16,15 +17,13 @@ import org.example.api.model.Chat;
 import org.example.api.model.Error;
 
 public class ChatListCell extends ListCell<Chat> {
-    private final Chat chatOpened;
     private final BorderPane chatPane;
     private final VBox chatMessages;
     private final ObservableList<Chat> chatList;
-    public ChatListCell(BorderPane chatPane, VBox chatMessages, ObservableList<Chat> chatList, Chat chatOpened) {
+    public ChatListCell(BorderPane chatPane, VBox chatMessages, ObservableList<Chat> chatList) {
         this.chatPane = chatPane;
         this.chatMessages = chatMessages;
         this.chatList = chatList;
-        this.chatOpened = chatOpened;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class ChatListCell extends ListCell<Chat> {
                         chatApi.cleanChat(chat.getId(), new APICallback() {
                             @Override
                             public void onSuccess(Object response) {
-                                if (chatOpened.getId() == chat.getId())
+                                if (Main.chatOpened.getId() == chat.getId())
                                     chatMessages.getChildren().clear();
                             }
 
@@ -78,7 +77,7 @@ public class ChatListCell extends ListCell<Chat> {
                         chatApi.deleteChat(chat.getId(), new APICallback() {
                             @Override
                             public void onSuccess(Object response) {
-                                if (chatOpened.getId() == chat.getId())
+                                if (Main.chatOpened.getId() == chat.getId())
                                     chatPane.setVisible(false);
 
                                 chatList.remove(chat);

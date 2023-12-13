@@ -47,7 +47,7 @@ public class Main {
     private ChatAPIClient chatApi;
     private MessageAPIClient messageApi;
     private NotificationAPIClient notyApi;
-    private Chat chatOpened;
+    public static Chat chatOpened;
     public void initialize() {
         myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
 
@@ -55,7 +55,7 @@ public class Main {
 
         chatListView.setItems(chatList);
 
-        chatListView.setCellFactory(param -> new ChatListCell(chatPane, chatMessages, chatList, chatOpened));
+        chatListView.setCellFactory(param -> new ChatListCell(chatPane, chatMessages, chatList));
 
         chatListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
