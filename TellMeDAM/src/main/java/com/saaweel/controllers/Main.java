@@ -216,7 +216,6 @@ public class Main {
 
                     ObservableList<User> items = FXCollections.observableArrayList(users);
 
-
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/saaweel/contactswindow.fxml"));
                     ListView<User> root = loader.load();
 
