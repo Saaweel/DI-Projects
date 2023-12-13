@@ -8,6 +8,7 @@ import io.github.palexdev.materialfx.controls.MFXContextMenuItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -179,21 +180,26 @@ public class Main {
         modifyData.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/saaweel/personal_data.fxml"));
+                Parent root = null;
 
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                
+                PersonalData controller = loader.getController();
                 Stage menuStage = new Stage();
 
                 menuStage.setTitle("Cambiar datos");
                 Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/saaweel/appIcon.png")));
                 menuStage.getIcons().add(icon);
 
-                try {
-                    menuStage.setScene(new Scene(loader.load()));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                menuStage.setScene(new Scene(root));
+
+                controller.setStage(menuStage);
 
                 menuStage.show();
-
             }
         });
 

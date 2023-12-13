@@ -65,4 +65,8 @@ public class PersonalData {
         photoUrlField.setText(user.getPhotourl());
         passwordField.setText(user.getPassword());
     }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }
