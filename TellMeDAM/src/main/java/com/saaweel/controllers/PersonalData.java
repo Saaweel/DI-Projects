@@ -34,6 +34,8 @@ public class PersonalData {
                     if (response instanceof User) {
                         User newUser = (User) response;
 
+                        newUser.setPassword(pass);
+
                         Preferences preferences = Preferences.userNodeForPackage(App.class);
                         preferences.put("UserEmail", newUser.getEmail());
                         preferences.put("UserPass", newUser.getPassword());
