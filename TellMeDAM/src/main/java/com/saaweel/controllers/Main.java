@@ -178,9 +178,22 @@ public class Main {
         MFXContextMenuItem modifyData = new MFXContextMenuItem("Modificar datos personales");
         modifyData.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
-                // TODO: Abrir modal para modificar datos personales
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/saaweel/personal_data.fxml"));
 
-                System.out.println("Modificar datos personales");
+                Stage menuStage = new Stage();
+
+                menuStage.setTitle("Cambiar datos");
+                Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/saaweel/appIcon.png")));
+                menuStage.getIcons().add(icon);
+
+                try {
+                    menuStage.setScene(new Scene(loader.load()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                menuStage.show();
+
             }
         });
 

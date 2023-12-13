@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefWidth="500.0" style="-fx-background-color: #444851; -fx-background-radius: 5.0;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.PersonalData">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <MFXTextField fx:id="userField" floatMode="BORDER" floatingText="Usuario" maxWidth="1.7976931348623157E308">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </MFXTextField>
+    <MFXTextField fx:id="emailField" floatMode="BORDER" floatingText="Correo electrónico" maxWidth="1.7976931348623157E308">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </MFXTextField>
+    <MFXTextField fx:id="photoUrlField" floatMode="BORDER" floatingText="Url foto de perfil" maxWidth="1.7976931348623157E308">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </MFXTextField>
+    <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Contraseña" maxWidth="1.7976931348623157E308">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </MFXPasswordField>
+    <MFXButton buttonType="RAISED" maxWidth="1.7976931348623157E308" onAction="#sendData" style="-fx-background-color: #5767ea; -fx-text-fill: white;" text="Modificar datos">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+        <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+        </padding>
+    </MFXButton>
+</VBox>
