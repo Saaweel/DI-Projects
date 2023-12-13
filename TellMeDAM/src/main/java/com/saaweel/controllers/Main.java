@@ -180,14 +180,14 @@ public class Main {
         modifyData.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (event.isPrimaryButtonDown()) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/saaweel/personal_data.fxml"));
-                Parent root = null;
+                Parent root;
 
                 try {
                     root = loader.load();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                
+
                 PersonalData controller = loader.getController();
                 Stage menuStage = new Stage();
 
