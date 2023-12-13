@@ -23,7 +23,12 @@
             <Insets top="10.0" />
         </VBox.margin>
     </MFXTextField>
-    <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Contraseña" maxWidth="1.7976931348623157E308">
+    <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText="Nueva contraseña" maxWidth="1.7976931348623157E308">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </MFXPasswordField>
+    <MFXPasswordField fx:id="oldPasswordField" floatMode="BORDER" floatingText="Contraseña actual" maxWidth="1.7976931348623157E308">
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>

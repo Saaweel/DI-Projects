@@ -56,6 +56,7 @@ public class Login {
 
         if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
             App.showNotification("Email inválido", "El formato correcto es: \nusuario@dominio.com");
+            return;
         }
 
         if (register) {
