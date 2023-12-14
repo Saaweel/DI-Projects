@@ -11,17 +11,22 @@ import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+
+import java.awt.*;
+import java.util.Objects;
 
 public class Notification extends MFXSimpleNotification {
     public Notification(String headerText, String text) {
+        ImageView icon = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/saaweel/appIcon.png"))));
 
-        MFXFontIcon fi = new MFXFontIcon();
-        IconDescriptor desc = FontAwesomeSolid.BELL;
-        fi.setDescription(desc.getDescription());
-        fi.setSize(16);
-        MFXIconWrapper icon = new MFXIconWrapper(fi, 32);
+        icon.setFitHeight(35);
+        icon.setFitWidth(35);
+        icon.setClip(new Circle(17.5, 17.5, 17.5));
 
         Label headerLabel = new Label();
         headerLabel.textProperty().bind(new SimpleStringProperty(headerText));

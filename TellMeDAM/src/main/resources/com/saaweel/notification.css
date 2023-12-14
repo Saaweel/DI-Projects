@@ -1,13 +1,14 @@
 .notification {
-	-fx-background-color: white;
+	-fx-background-color: #353940;
 	-fx-background-radius: 5;
-	-fx-border-color: #ebebeb;
+	-fx-border-color: #444851;
 	-fx-border-radius: 5;
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
 .notification .label {
 	-fx-font-family: 'Open Sans Bold';
-	-fx-text-fill: black;
+	-fx-text-fill: white;
 }
 
 .notification .content {
