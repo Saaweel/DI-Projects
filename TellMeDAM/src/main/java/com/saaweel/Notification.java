@@ -1,11 +1,7 @@
 package com.saaweel;
 
-import io.github.palexdev.materialfx.controls.MFXIconWrapper;
 import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
 import io.github.palexdev.materialfx.factories.InsetsFactory;
-import io.github.palexdev.mfxresources.fonts.IconDescriptor;
-import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
-import io.github.palexdev.mfxresources.fonts.fontawesome.FontAwesomeSolid;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
@@ -17,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-import java.awt.*;
 import java.util.Objects;
 
 public class Notification extends MFXSimpleNotification {

@@ -101,9 +101,7 @@ public class Main {
             }
         }).start();
 
-        chatMessages.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-            scrollToBottom();
-        });
+        chatMessages.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> scrollToBottom());
     }
 
     private void loadMainInfo(User user) {
@@ -241,6 +239,7 @@ public class Main {
         new Thread(() -> {
             while (!chatsLoaded[0]) {
                 try {
+                    //noinspection BusyWait
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -421,8 +420,6 @@ public class Main {
     }
 
     private void scrollToBottom() {
-        Platform.runLater(() -> {
-            chatMessagesScroll.setVvalue(chatMessagesScroll.getVmax());
-        });
+        Platform.runLater(() -> chatMessagesScroll.setVvalue(chatMessagesScroll.getVmax()));
     }
 }

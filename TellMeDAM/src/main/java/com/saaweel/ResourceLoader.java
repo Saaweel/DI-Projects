@@ -1,6 +1,5 @@
 package com.saaweel;
 
-import java.io.InputStream;
 import java.net.URL;
 
 /**
