@@ -204,7 +204,7 @@ public class Main {
 
                 menuStage.setScene(new Scene(root));
 
-                controller.setStage(menuStage);
+                controller.setStageAndImageView(menuStage, myPhoto);
 
                 menuStage.show();
             }

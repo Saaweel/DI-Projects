@@ -3,6 +3,8 @@ package com.saaweel.controllers;
 import com.saaweel.App;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.api.APICallback;
 import org.example.api.UserAPIClient;
@@ -14,6 +16,8 @@ import java.util.prefs.Preferences;
 
 public class PersonalData {
     private Stage stage;
+
+    private ImageView myPhoto;
     public MFXTextField userField;
     public MFXTextField emailField;
     public MFXTextField photoUrlField;
@@ -75,6 +79,8 @@ public class PersonalData {
                     preferences.put("UserEmail", newUser.getEmail());
                     preferences.put("UserPass", newUser.getPassword());
 
+                    myPhoto.setImage(new Image(newUser.getPhotourl()));
+
                     App.setMyUser(newUser);
 
                     stage.close();
@@ -97,10 +103,10 @@ public class PersonalData {
         userField.setText(user.getUsername());
         emailField.setText(user.getEmail());
         photoUrlField.setText(user.getPhotourl());
-        passwordField.setText(user.getPassword());
     }
 
-    public void setStage(Stage stage) {
+    public void setStageAndImageView(Stage stage, ImageView myPhoto) {
         this.stage = stage;
+        this.myPhoto = myPhoto;
     }
 }
