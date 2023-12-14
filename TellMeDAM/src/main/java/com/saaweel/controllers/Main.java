@@ -5,6 +5,7 @@ import com.saaweel.ChatListCell;
 import com.saaweel.UserListCell;
 import io.github.palexdev.materialfx.controls.MFXContextMenu;
 import io.github.palexdev.materialfx.controls.MFXContextMenuItem;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +41,7 @@ public class Main {
     public TextField messageTextField;
     public Label chatName;
     public BorderPane chatPane;
+    public ScrollPane chatMessagesScroll;
     public VBox chatMessages;
     public VBox mainFrame;
     public ImageView myPhoto;
@@ -94,6 +97,10 @@ public class Main {
                 loadMainInfo(user);
             }
         }).start();
+
+        chatMessages.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
+            scrollToBottom();
+        });
     }
 
     private void loadMainInfo(User user) {
@@ -392,5 +399,11 @@ public class Main {
 
     private String getNameFromChat(Chat chat) {
         return chat.getUser1_id() != App.getMyUser().getId() ? chat.getUser1_username() : chat.getUser2_username();
+    }
+
+    private void scrollToBottom() {
+        Platform.runLater(() -> {
+            chatMessagesScroll.setVvalue(chatMessagesScroll.getVmax());
+        });
     }
 }

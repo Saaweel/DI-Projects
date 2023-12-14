@@ -42,7 +42,7 @@
                 </HBox>
             </top>
             <center>
-                <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                <ScrollPane fx:id="chatMessagesScroll" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;">
                     <VBox fx:id="chatMessages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" styleClass="chat-messages">
                         <VBox styleClass="message">
                             <Label styleClass="message-user" text="Tucci" />
