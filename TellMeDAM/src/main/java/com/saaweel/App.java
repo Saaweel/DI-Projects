@@ -35,12 +35,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         Preferences preferences = Preferences.userNodeForPackage(App.class);
-        String userEmail = preferences.get("UserEmail", null);
-        String userPass = preferences.get("UserPass", null);
+        String userEmail = preferences.get("UserEmail", "");
+        String userPass = preferences.get("UserPass", "");
 
         showStartingApp(stage);
 
-        if (userEmail != null && userPass != null) {
+        if (!userEmail.isEmpty() && !userPass.isEmpty()) {
             UserAPIClient userApi = new UserAPIClient();
             userApi.login(userEmail, userPass, new APICallback() {
                 @Override
@@ -60,8 +60,8 @@ public class App extends Application {
 
                 @Override
                 public void onError(Object response) {
-                    preferences.put("UserEmail", null);
-                    preferences.put("UserPass", null);
+                    preferences.put("UserEmail", "");
+                    preferences.put("UserPass", "");
 
                     try {
                         startInternal(stage, false);

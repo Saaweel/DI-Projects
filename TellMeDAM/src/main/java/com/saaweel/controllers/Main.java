@@ -45,6 +45,7 @@ public class Main {
     public VBox chatMessages;
     public VBox mainFrame;
     public ImageView myPhoto;
+    public VBox loadingMain;
     private ObservableList<Chat> chatList;
     private UserAPIClient userApi;
     private ChatAPIClient chatApi;
@@ -52,6 +53,8 @@ public class Main {
     private NotificationAPIClient notyApi;
     public static Chat chatOpened;
     public void initialize() {
+        loadingMain.setVisible(true);
+
         myPhoto.setClip(new Circle(17.5, 17.5, 17.5));
 
         chatList = FXCollections.observableArrayList();
@@ -104,6 +107,8 @@ public class Main {
     }
 
     private void loadMainInfo(User user) {
+        final boolean[] chatsLoaded = {false};
+
         myPhoto.setImage(new Image(user.getPhotourl()));
 
         chatApi.getAllChatsFromUser(user.getId(), new APICallback() {
@@ -115,6 +120,7 @@ public class Main {
 
                     chatList.addAll(chats);
                 }
+                chatsLoaded[0] = true;
             }
 
             @Override
@@ -123,6 +129,7 @@ public class Main {
                     Error error = (Error) response;
                     App.showNotification("Error al cargar los chats", error.getError());
                 }
+                chatsLoaded[0] = true;
             }
         });
 
@@ -230,6 +237,18 @@ public class Main {
         menu.addItem(exitSession);
 
         menu.install();
+
+        new Thread(() -> {
+            while (!chatsLoaded[0]) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            loadingMain.setVisible(false);
+        }).start();
     }
 
     public void newChat() throws IOException, InterruptedException {

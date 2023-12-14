@@ -6,64 +6,70 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="mainFrame" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
+<StackPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.controllers.Main">
+    <VBox fx:id="mainFrame" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: #353940;" stylesheets="@custom.css">
     <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" styleClass="actionBar">
-        <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </padding>
-        <ImageView fx:id="myPhoto" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
-            <HBox.margin>
-                <Insets right="10.0" />
-            </HBox.margin>
-            <Image url="@appIcon.png" />
-        </ImageView>
-        <MFXButton buttonType="RAISED" onAction="#newChat" style="-fx-background-color: #5767ea; -fx-text-fill: white;" text="+ Nuevo chat">
-            <VBox.margin>
-                <Insets top="10.0" />
-            </VBox.margin>
-            <padding>
-                <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-            </padding>
-        </MFXButton>
+      <padding>
+          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+      <ImageView fx:id="myPhoto" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+          <HBox.margin>
+              <Insets right="10.0" />
+          </HBox.margin>
+          <Image url="@appIcon.png" />
+      </ImageView>
+      <MFXButton buttonType="RAISED" onAction="#newChat" style="-fx-background-color: #5767ea; -fx-text-fill: white;" text="+ Nuevo chat">
+          <VBox.margin>
+              <Insets top="10.0" />
+          </VBox.margin>
+          <padding>
+              <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+          </padding>
+      </MFXButton>
     </HBox>
     <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" VBox.vgrow="ALWAYS">
-        <ListView fx:id="chatListView" maxWidth="500.0" minWidth="200.0" style="-fx-background-color: transparent;">
-            <padding>
-                <Insets top="5.0" />
-            </padding>
-        </ListView>
-        <BorderPane fx:id="chatPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false">
-            <top>
-                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 10; -fx-background-color: #444851; -fx-background-radius: 5;">
-                    <Label fx:id="chatName" style="-fx-text-fill: white;" text="Label" />
-                   <BorderPane.margin>
-                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                   </BorderPane.margin>
-                </HBox>
-            </top>
-            <center>
-                <ScrollPane fx:id="chatMessagesScroll" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;">
-                    <VBox fx:id="chatMessages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" styleClass="chat-messages">
-                        <VBox styleClass="message">
-                            <Label styleClass="message-user" text="Tucci" />
-                            <Label styleClass="message-content" text="Test" />
-                        </VBox>
-                        <VBox styleClass="message">
-                            <Label styleClass="message-user" text="Saaweel" />
-                            <Label styleClass="message-content" text="Test" />
-                        </VBox>
-                        <padding>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                        </padding>
-                    </VBox>
-                </ScrollPane>
-            </center>
-            <bottom>
-                <TextField fx:id="messageTextField" onKeyPressed="#handleKeyPress" styleClass="input-message">
-                <BorderPane.margin>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </BorderPane.margin></TextField>
-            </bottom>
-        </BorderPane>
+      <ListView fx:id="chatListView" maxWidth="500.0" minWidth="200.0" style="-fx-background-color: transparent;">
+          <padding>
+              <Insets top="5.0" />
+          </padding>
+      </ListView>
+      <BorderPane fx:id="chatPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" visible="false">
+          <top>
+              <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-padding: 10; -fx-background-color: #444851; -fx-background-radius: 5;">
+                  <Label fx:id="chatName" style="-fx-text-fill: white;" text="Label" />
+                 <BorderPane.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                 </BorderPane.margin>
+              </HBox>
+          </top>
+          <center>
+              <ScrollPane fx:id="chatMessagesScroll" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                  <VBox fx:id="chatMessages" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #353940;" styleClass="chat-messages">
+                      <VBox styleClass="message">
+                          <Label styleClass="message-user" text="Tucci" />
+                          <Label styleClass="message-content" text="Test" />
+                      </VBox>
+                      <VBox styleClass="message">
+                          <Label styleClass="message-user" text="Saaweel" />
+                          <Label styleClass="message-content" text="Test" />
+                      </VBox>
+                      <padding>
+                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                      </padding>
+                  </VBox>
+              </ScrollPane>
+          </center>
+          <bottom>
+              <TextField fx:id="messageTextField" onKeyPressed="#handleKeyPress" styleClass="input-message">
+              <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+              </BorderPane.margin>
+          </TextField>
+          </bottom>
+      </BorderPane>
     </SplitPane>
-</VBox>
+    </VBox>
+    <VBox fx:id="loadingMain" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #444851;" stylesheets="@custom.css" visible="false" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+        <MFXProgressSpinner radius="24.0" style="-mfx-color1: #5767ea; -mfx-color2: #5767ea; -mfx-color3: #5767ea; -mfx-color4: #5767ea;" />
+    </VBox>
+</StackPane>
