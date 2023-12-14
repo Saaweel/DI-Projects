@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox style="-fx-background-color: #444851; -fx-background-radius: 10; -fx-padding: 5;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.DigimonController">
+    <Label fx:id="id" style="-fx-text-fill: white; -fx-font-weight: bold;" text="ID: ID" />
+    <Label fx:id="name" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Name: name" />
+</VBox>
