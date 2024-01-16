@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.saaweel.PrimaryController">
+    <ComboBox fx:id="selector" prefWidth="150.0" promptText="All" />
+    <HBox VBox.vgrow="ALWAYS">
+        <LineChart fx:id="chart1" title="Temperature Over Time" HBox.hgrow="ALWAYS">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <BarChart fx:id="chart2" title="Precipitation By Month" HBox.hgrow="ALWAYS">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </HBox>
+    <HBox VBox.vgrow="ALWAYS">
+        <AreaChart fx:id="chart3" title="Humidity Over Time" HBox.hgrow="ALWAYS">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </AreaChart>
+        <ScatterChart fx:id="chart4" title="Wind Speed Over Time" HBox.hgrow="ALWAYS">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </ScatterChart>
+    </HBox>
+</VBox>
